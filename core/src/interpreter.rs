@@ -273,8 +273,8 @@ impl Interpreter {
                 register_y,
             } => self.variable_registers[register_x] = self.variable_registers[register_y],
             Instruction::SetIndexWithAddress { address } => self.index_register = address,
-            Instruction::SetIndexWithSpriteAddress { register } => {
-                self.index_register = self.variable_registers[register] as u16 * 5;
+            Instruction::SetIndexWithFontAddress { register } => {
+                self.index_register = (self.variable_registers[register] & 0b0000_1111) as u16 * 5;
             }
 
             // Arithmetic operations

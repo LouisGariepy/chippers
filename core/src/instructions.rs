@@ -118,7 +118,7 @@ pub fn decode(instruction: u16) -> Instruction {
         (0xF, _, 0x1, 0xE) => AddIndexWithVariable {
             register: b as usize,
         },
-        (0xF, _, 0x2, 0x9) => SetIndexWithSpriteAddress {
+        (0xF, _, 0x2, 0x9) => SetIndexWithFontAddress {
             register: b as usize,
         },
         (0xF, _, 0x3, 0x3) => StoreDecimalConversion {
@@ -181,7 +181,7 @@ pub enum Instruction {
     /// Annn
     SetIndexWithAddress { address: u16 },
     /// Fx29
-    SetIndexWithSpriteAddress { register: usize },
+    SetIndexWithFontAddress { register: usize },
 
     // Arithmetic operations
     /// 7xkk
