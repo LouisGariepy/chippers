@@ -1,5 +1,3 @@
-use std::process::Command;
-
 use chippers_core::interpreter::Interpreter;
 
 fn main() {
