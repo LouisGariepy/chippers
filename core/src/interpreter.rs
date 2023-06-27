@@ -174,12 +174,14 @@ impl Interpreter {
         }
     }
 
-    fn fetch_instruction(&mut self) -> u16 {
+    pub fn fetch_instruction(&mut self) -> u16 {
+        let instruction_start = self.program_counter as usize;
+        let instruction_end = instruction_start + 2;
+
         // Fetch raw instruction bytes
-        let raw_instruction = [
-            self.ram[self.program_counter],
-            self.ram[self.program_counter + 1],
-        ];
+        let raw_instruction: [u8; 2] = self.ram[instruction_start..instruction_end]
+            .try_into()
+            .unwrap();
 
         // Make 16 bit instruction out of raw instruction (note the big-endianness)
         let instruction = u16::from_be_bytes(raw_instruction);

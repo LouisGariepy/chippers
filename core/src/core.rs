@@ -1,6 +1,6 @@
 use std::{
     fmt::Display,
-    ops::{Index, IndexMut},
+    ops::{Index, IndexMut, Range},
 };
 
 pub struct Ram([u8; 4096]);
@@ -21,6 +21,14 @@ impl Ram {
         for (offset, byte) in program.iter().copied().enumerate() {
             self.0[0x200 + offset] = byte;
         }
+    }
+}
+
+impl Index<Range<usize>> for Ram {
+    type Output = [u8];
+
+    fn index(&self, range: Range<usize>) -> &Self::Output {
+        &self.0[range]
     }
 }
 
