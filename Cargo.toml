@@ -1,0 +1,3 @@
+[workspace]
+members = ["core", "frontends/*", "rom_tester"]
+resolver = "2"
